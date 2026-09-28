@@ -1,0 +1,21 @@
+# Entornos virtuales
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+
+# Carpetas de configuración de PyCharm y VSCode
+.idea/
+.vscode/
+
+# Datos privados y crudos de Spotify (Archivos JSON)
+data/
+*.json
+
+# Variables de entorno y contraseñas
+.env
+
+# Archivos de base de datos local
+*.db
+*.sqlite

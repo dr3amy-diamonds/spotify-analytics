@@ -1,0 +1,25 @@
+# Conexiones a Bases de Datos
+pymongo
+psycopg2-binary
+SQLAlchemy
+
+# Variables de Entorno
+python-dotenv
+
+# Procesamiento de Datos y Álgebra
+pandas
+numpy
+
+# Integración con Spotify Web API
+requests
+
+# Machine Learning y Métricas
+scikit-learn
+
+# API Backend
+fastapi
+uvicorn
+pydantic
+
+# Pruebas Unitarias
+pytest
