@@ -1,7 +1,12 @@
+version: '3.8'
+
 services:
   mongodb:
     image: mongo:6.0
     container_name: spotify_mongo_db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASS}
     ports:
       - "27017:27017"
     volumes:
@@ -11,9 +16,9 @@ services:
     image: postgres:16
     container_name: spotify_pg_db
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: secret123
-      POSTGRES_DB: spotify_analytics_db
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5432:5432"
     volumes:
