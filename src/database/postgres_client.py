@@ -1,6 +1,8 @@
 import os
+from collections.abc import Iterator
+from contextlib import contextmanager
 from sqlalchemy import create_engine, text
-from sqlalchemy.orm import sessionmaker, DeclarativeBase
+from sqlalchemy.orm import Session, sessionmaker, DeclarativeBase
 from dotenv import load_dotenv
 
 # override=True obliga a recargar los valores del .env actual
@@ -23,16 +25,32 @@ if not DATABASE_URL:
 if not DATABASE_URL:
     raise ValueError("CRÍTICO: No se encontró DATABASE_URL ni las variables POSTGRES_* en el archivo .env")
 
+# SQLAlchemy 2.1 usa psycopg (v3) por defecto; venv trae psycopg2-binary
+if DATABASE_URL.startswith("postgresql://"):
+    DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+psycopg2://", 1)
+
 engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 class Base(DeclarativeBase):
     pass
 
-def get_db():
+def get_db() -> Iterator[Session]:
     db = SessionLocal()
     try:
         yield db
+    finally:
+        db.close()
+
+@contextmanager
+def get_db_ctx():
+    db = SessionLocal()
+    try:
+        yield db
+        db.commit()
+    except Exception:
+        db.rollback()
+        raise
     finally:
         db.close()
 

@@ -1,0 +1,38 @@
+:root {
+  --bg: #121214;
+  --card: #1E1E24;
+  --border: #2A2A32;
+  --text-primary: #F4F4F6;
+  --text-secondary: #A1A1AA;
+  --accent-primary: #FF5E97;
+  --accent-secondary: #A78BFA;
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button:focus-visible,
+select:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
